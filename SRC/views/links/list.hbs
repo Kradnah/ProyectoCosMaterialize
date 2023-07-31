@@ -1,0 +1,52 @@
+<body>
+<div class="container p-4 movie-container" id="movie-container">
+  <div class="row">
+    {{#each links}}
+    <div class="col s12 m6 l4">
+      <div class="card">
+        <div class="card-content center-align">
+          <a href="{{url}}" target="_blank">
+            <h3 class="card-title text-uppercase">
+              {{title}}
+            </h3>
+          </a>
+          <p class="m-2">{{director}}</p>
+          <p class="m-2">{{year}}</p>
+
+          <p class="m-2">{{description}}</p>
+          <p class="m-2">{{ratingStars rating}}</p>
+          <p class="text-muted">
+            {{timeago created_at}}
+          </p>
+          <p class="m-2">
+            <button class="toggleSeenButton interactive-icon waves-effect waves-light btn-flat" data-status="{{seen}}" data-movie-id="{{id}}">
+              {{{seenIcon seen}}}
+            </button>
+          </p>
+          <p class="m-2"> 
+            ‎
+          </p>
+          <a class="waves-effect waves-light btn red delete-movie-btn" data-movie-id="{{id}}">
+            Delete Movie
+          </a>
+          <a class="waves-effect waves-light btn" href="/links/edit/{{id}}">
+            Edit
+          </a>
+        
+        </div>
+      </div>
+    </div>
+
+    {{else}}
+    <div class="col s12 m6 l4">
+      <div class="card">
+        <div class="card-content center-align">
+          <p>There are no movies saved yet.</p>
+          <a class="waves-effect waves-light btn" href="/links/add">Add One!</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+</body>

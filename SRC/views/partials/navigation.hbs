@@ -1,0 +1,66 @@
+<body>
+  <div class="navbar navbar-fixed">
+    <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-purple-deep-orange gradient-shadow">
+      <div class="nav-wrapper">
+        
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-film"></i> 
+        </a>
+
+        
+        <a href="#" data-target="slide-out-right" class="sidenav-trigger">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+
+        
+        <ul class="navbar-list right">
+          {{#if user}}
+          <li class="dropdown-movie-list">
+            <a class="waves-effect waves-block waves-light dropdown-toggle" href="#" data-target="movie-list-dropdown" aria-haspopup="true" aria-expanded="false">
+              Movie List
+            </a>
+            <div class="dropdown-menu" aria-labelledby="movie-list-dropdown">
+              <a class="dropdown-item" href="/links">All Movies</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/links/add">Add A Movie</a>
+            </div>
+          </li>
+          <li class="dropdown-movie-list">
+            <a class="waves-effect waves-block waves-light profile-button" href="#" data-target="movie-list-dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="avatar-status avatar-online">
+                <img src="/img/logo.png">
+              <i></i>
+              </span>
+            </a>
+          <div class="dropdown-menu" aria-labelledby="movie-list-dropdown">
+            <a class="dropdown-item" href="/profile">
+              <i class="material-icons left">person_outline</i>Profile
+            </a>
+          <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout">
+              <i class="material-icons left">keyboard_tab</i>Logout
+            </a>
+          </div>
+          </li>
+          {{else}}
+          <li><a class="waves-effect waves-block waves-light" href="/signin">SignIn</a></li>
+          <li><a class="waves-effect waves-block waves-light" href="/signup">SignUp</a></li>
+          {{/if}}
+        </ul>
+
+        <!-- Profile Dropdown (hidden by default on small screens) -->
+        <ul class="dropdown-content" id="profile-dropdown">
+          <li><a class="grey-text text-darken-1" href="/profile"><i class="material-icons">person_outline</i> Profile</a></li>
+          <li><a class="grey-text text-darken-1" href="app-chat.html"><i class="material-icons">chat_bubble_outline</i> Chat</a></li>
+          <li><a class="grey-text text-darken-1" href="page-faq.html"><i class="material-icons">help_outline</i> Help</a></li>
+          <li class="divider"></li>
+          <li><a class="grey-text text-darken-1" href="user-lock-screen.html"><i class="material-icons">lock_outline</i> Lock</a></li>
+          <li><a class="grey-text text-darken-1" href="/logout"><i class="material-icons">keyboard_tab</i> Logout</a></li>
+        </ul>
+      </div>
+      <nav class="display-none search-sm">
+        <!-- Add your search bar content here -->
+      </nav>
+    </nav>
+  </div>
+</body>

@@ -1,0 +1,45 @@
+<body>
+  <div class="container p-4">
+    <div class="row">
+      <div class="col s12 m6 l4 offset-m3 offset-l4">
+        <div class="card">
+          <div class="card-content">
+            <form action="/links/add" method="POST">
+              <div class="input-field">
+                <input type="text" name="title" class="validate" placeholder="Name of the movie" autofocus>
+                <label for="title">Name of the movie</label>
+              </div>
+              <div class="input-field">
+              <input type="text" name="director" class="validate" placeholder="Director">
+              <label for="director">Director</label>
+            </div>
+            <div class="input-field">
+              <input type="number" name="year" class="validate" placeholder="Year">
+              <label for="year">Year</label>
+            </div>
+            <div class="input-field">
+              <input type="number" name="rating" min="1" max="5" class="validate" placeholder="Rate 1-5" value=3>
+              <label for="rating">Rating</label>
+            </div>
+            <p>
+              <label>
+                <input type="checkbox" name="seen" value="1" class="filled-in">
+                <span>Did you watch the movie?</span>
+              </label>
+            </p>
+            <div class="input-field">
+              <textarea name="description" class="materialize-textarea" placeholder="Description"></textarea>
+              <label for="description">Description</label>
+            </div>
+            <div class="input-field">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Save
+                  <i class="material-icons right">save</i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

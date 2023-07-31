@@ -1,0 +1,56 @@
+{{#if message}}
+<div class="container p-4">
+  <div class="row">
+    <div class="col s12 m6 l4 offset-m3 offset-l4">
+      <div class="card-alert card gradient-45deg-red-pink">
+        <div class="card-content white-text">
+          <p>
+          <i class="material-icons">error</i>
+            {{message}}
+          </p>
+          <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
+
+{{#if success}}
+<div class="container p-4">
+  <div class="row">
+    <div class="col s12 m6 l4 offset-m3 offset-l4">
+      <div class="card-alert card gradient-45deg-green-teal">
+        <div class="card-content white-text">
+                  <p>
+                    <i class="material-icons">check</i> {{success}}</p>
+                </div>
+          <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
+ <script>
+  // Esperar a que el DOM esté completamente cargado
+  document.addEventListener("DOMContentLoaded", function () {
+    // Obtener todos los botones de cierre con el atributo data-dismiss="alert"
+    const closeButtons = document.querySelectorAll("[data-dismiss='alert']");
+
+    // Agregar un event listener para cada botón de cierre
+    closeButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        // Obtener el elemento padre de la alerta (por ejemplo, el div con la clase "alert")
+        const alertElement = this.parentElement;
+
+        // Ocultar la alerta (también podrías animar su desaparición aquí si lo deseas)
+        alertElement.style.display = "none";
+      });
+    });
+  });
+</script>
