@@ -30,61 +30,55 @@ app.set('view engine', '.hbs');
 
 // Middlewares
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(session({
-  secret: 'faztmysqlnodemysql',
-  resave: false,
-  saveUninitialized: false,
-  store: new MySQLStore(database)
-}));
+try {
+  app.use(session({
+    secret: 'faztmysqlnodemysql',
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore(database)
+  }));
+} catch (error) {
+  console.error('Error setting up session:', error);
+}
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Global variables
 app.use((req, res, next) => {
-  app.locals.message = req.flash('message');
-  app.locals.success = req.flash('success');
-  app.locals.user = req.user;
-  next();
+  try {
+    app.locals.message = req.flash('message');
+    app.locals.success = req.flash('success');
+    app.locals.user = req.user;
+    next();
+  } catch (error) {
+    console.error('Error setting up global variables:', error);
+    next(error);
+  }
 });
 
 // Routes
-
-app.use(require('./routes/index'));
-app.use(require('./routes/authentication'));
-app.use('/links', require('./routes/links'));
-
-
+try {
+  app.use(require('./routes/index'));
+  app.use(require('./routes/authentication'));
+  app.use('/links', require('./routes/links'));
+} catch (error) {
+  console.error('Error setting up routes:', error);
+}
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Starting
-app.listen(app.get('port'), () => {
-  console.log('Server is in port', app.get('port'));
-});
-
-//Stars rating
-Handlebars.registerHelper('ratingStars', function(rating) {
-  let stars = '';
-  for (let i = 1; i <= 5; i++) {
-    if (i <= rating) {
-      stars += '<i class="fas fa-star"></i>'; // Estrella llena
-    } else {
-      stars += '<i class="far fa-star"></i>'; // Estrella vacía
-    }
-  }
-  return new Handlebars.SafeString(stars); // Permite mostrar el contenido sin escapar HTML
-});
-
-//seen rating
-Handlebars.registerHelper('seenIcon', function(seen) {
-  if (seen === 1) {
-    return new Handlebars.SafeString('<i class="fas fa-check"></i>');
-  } else {
-    return new Handlebars.SafeString('<i class="fas fa-times"></i>');
-  }
-});
+const port = app.get('port');
+try {
+  app.listen(port, () => {
+    console.log('Server is running on port', port);
+  });
+} catch (error) {
+  console.error('Error starting the server:', error);
+}

@@ -4,7 +4,7 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
-// Función para registrar una acción en la tabla "tbl_logs"
+
 async function registerLog(user_id, movie_id, action) {
   const newLog = {
     FKLOG_USERID: user_id,
@@ -30,11 +30,11 @@ router.post('/add', async (req, res) => {
     FKMOV_USERID: req.user.PKUSU_NCODIGO
   };
 
-  // Insertar la nueva película y obtener el ID de la película insertada
+
   const insertResult = await pool.query('INSERT INTO tbl_movies SET ?', [newLink]);
   const movieId = insertResult.insertId;
 
-  // Registro de acción en la tabla "tbl_logs" - create
+
   await registerLog(req.user.PKUSU_NCODIGO, movieId, 'create');
 
   req.flash('success', 'Movie Saved Successfully');
@@ -49,10 +49,9 @@ router.get('/', isLoggedIn, async (req, res) => {
 router.get('/delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    // Actualizar el campo "MOV_CESTADO" a 'false' para ocultar la película
+
     await pool.query('UPDATE tbl_movies SET MOV_CESTADO = ? WHERE PKMOV_NCODIGO = ?', [false, id]);
 
-    // Registro de acción en la tabla "tbl_logs" - delete
     await registerLog(req.user.PKUSU_NCODIGO, id, 'delete');
 
     req.flash('success', 'Movie deleted Successfully');
@@ -84,7 +83,7 @@ router.post('/edit/:id', async (req, res) => {
   };
   await pool.query('UPDATE tbl_movies SET ? WHERE PKMOV_NCODIGO = ?', [newLink, id]);
 
-  // Registro de acción en la tabla "tbl_logs" - edit
+
   await registerLog(req.user.PKUSU_NCODIGO, id, 'edit');
 
   req.flash('success', 'Movie Updated Successfully');
