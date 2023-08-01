@@ -88,5 +88,3 @@ Handlebars.registerHelper('seenIcon', function(seen) {
     return new Handlebars.SafeString('<i class="fas fa-times"></i>');
   }
 });
-
-

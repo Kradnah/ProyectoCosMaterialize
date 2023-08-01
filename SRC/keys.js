@@ -5,7 +5,7 @@ module.exports = {
         host: 'localhost',
         user: 'root',
         password: 'Pass24680.',
-        database: 'db_links'
+        database: 'dbp_page_movies'
     }
 
 };
